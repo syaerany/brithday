@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Happy Birthday Piyan ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
+
+:root{
+  --red:#8e2527;
+  --red2:#a9363a;
+  --pink:#f6cfd3;
+  --cream:#fffaf6;
+  --ink:#542426;
+  --soft:#f9e4e5
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:'Baloo 2',sans-serif;
+  color:var(--ink)
+}
+
+body{
+  background:linear-gradient(135deg,#f5c9cf,#fff1e9 48%,#efbfc7);
+  background-attachment:fixed
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.38;
+  background-image:radial-gradient(#fff 1px,transparent 1px);
+  background-size:12px 12px
+}
+
+.page{
+  display:none;
+  min-height:100vh;
+  padding:22px 14px;
+  align-items:center;
+  justify-content:center
+}
+
+.page.active{display:flex}
+
+.card{
+  width:min(430px,100%);
+  min-height:calc(100vh - 44px);
+  padding:24px 20px 78px;
+  background:var(--cream);
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 16px 40px #72282d35
+}
+
+.card:before{
+  content:"";
+  position:absolute;
+  inset:10px;
+  border:3px double #b64a50;
+  pointer-events:none
+}
+
+.card:after{
+  content:"✦  ❀  ✦  ❀  ✦";
+  position:absolute;
+  top:17px;
+  left:0;
+  right:0;
+  text-align:center;
+  color:#b64a50;
+  font-size:16px;
+  letter-spacing:6px
+}
+
+.center{
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center
+}
+
+h1,h2{
+  font-family:'DM Serif Display',serif;
+  color:var(--red);
+  margin:0 0 12px;
+  position:relative;
+  z-index:1
+}
+
+h1{
+  font-size:43px;
+  line-height:.98;
+  letter-spacing:1px
+}
+
+h2{font-size:29px}
+
+p{
+  font-size:16px;
+  line-height:1.55;
+  position:relative;
+  z-index:1
+}
+
+.tiny{
+  font-size:12px;
+  opacity:.65
+}
+
+button{
+  border:0;
+  border-radius:999px;
+  background:var(--red);
+  color:white;
+  padding:11px 22px;
+  font:700 15px 'Baloo 2',sans-serif;
+  box-shadow:0 6px 12px #7e252830;
+  cursor:pointer;
+  position:relative;
+  z-index:2
+}
+
+.next{
+  position:absolute;
+  bottom:22px;
+  right:22px
+}
+
+.back{
+  position:absolute;
+  bottom:22px;
+  left:22px;
+  background:#f0bfc5;
+  color:var(--red)
+}
+
+input{
+  width:88%;
+  padding:13px 15px;
+  border:2px solid #e5aeb4;
+  border-radius:15px;
+  background:white;
+  color:var(--ink);
+  font:600 16px 'Baloo 2';
+  text-align:center;
+  position:relative;
+  z-index:1
+}
+
+.error{
+  height:22px;
+  color:#a32e33;
+  font-size:13px
+}
+
+.ornament{
+  font-size:34px;
+  color:var(--red);
+  margin-bottom:5px
+}
+
+.smallheart{
+  position:absolute;
+  color:#b84249;
+  font-size:26px;
+  z-index:1
+}
+
+.decor{
+  font-size:62px;
+  margin-bottom:5px;
+  z-index:1
+}
+
+/* CALENDAR */
+.calendar{
+  margin:13px auto;
+  width:100%;
+  border:2px solid #c66b72;
+  padding:12px;
+  background:#fff;
+  border-radius:5px;
+  position:relative;
+  z-index:1
+}
+
+.month{
+  text-align:center;
+  font-family:'DM Serif Display';
+  color:var(--red);
+  font-size:22px;
+  margin-bottom:8px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:3px;
+  text-align:center;
+  font-size:12px
+}
+
+.grid div{padding:6px 0}
+
+.day{
+  font-weight:800;
+  color:#a23a40
+}
+
+.special{
+  background:var(--red);
+  color:#fff;
+  border-radius:50%;
+  font-weight:800
+}
+
+/* LETTER */
+.envelope{
+  font-size:92px;
+  cursor:pointer;
+  transition:.2s;
+  z-index:1
+}
+
+.envelope:hover{
+  transform:scale(1.04)
+}
+
+.letter{
+  display:none;
+  text-align:left;
+  background:#fff7f3;
+  border:2px solid #d99097;
+  padding:15px;
+  margin-top:10px;
+  max-height:55vh;
+  overflow:auto;
+  position:relative;
+  z-index:1
+}
+
+/* GIFTS */
+.gifts{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  width:100%;
+  margin-top:20px;
+  position:relative;
+  z-index:1
+}
+
+.gift{
+  padding:10px 5px;
+  background:#fff;
+  border:2px solid #d98c94;
+  border-radius:6px;
+  cursor:pointer;
+  box-shadow:0 5px 12px #76262b18
+}
+
+.gift span{
+  display:block;
+  color:var(--red);
+  font-weight:800;
+  font-size:12px;
+  margin-top:5px
+}
+
+.gift-art{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative
+}
+
+.box{
+  width:55px;
+  height:43px;
+  background:#a72f34;
+  border-radius:3px;
+  position:relative;
+  box-shadow:0 5px 8px #0002
+}
+
+.box:before{
+  content:"";
+  position:absolute;
+  left:22px;
+  top:-8px;
+  width:10px;
+  height:59px;
+  background:#f1b8be
+}
+
+.box:after{
+  content:"";
+  position:absolute;
+  left:-5px;
+  top:-8px;
+  width:65px;
+  height:10px;
+  background:#c3474d;
+  border-radius:3px
+}
+
+.bow{
+  position:absolute;
+  top:-21px;
+  left:14px;
+  font-size:27px;
+  color:#f1b8be
+}
+
+/* REVEALS */
+.reveal{
+  display:none;
+  width:100%;
+  margin-top:18px;
+  position:relative;
+  z-index:1
+}
+
+.reveal-card{
+  border:2px solid #d99097;
+  background:#fff7f3;
+  padding:14px
+}
+
+.reveal-title{
+  font-family:'DM Serif Display';
+  font-size:23px;
+  color:var(--red);
+  margin-bottom:8px
+}
+
+/* CAKE */
+.cake-art{
+  height:145px;
+  position:relative;
+  margin:auto;
+  width:190px
+}
+
+.cake-bottom{
+  position:absolute;
+  bottom:14px;
+  left:27px;
+  width:136px;
+  height:48px;
+  background:#d96b73;
+  border-radius:8px 8px 15px 15px;
+  border:4px solid #a63a40
+}
+
+.cake-top{
+  position:absolute;
+  bottom:53px;
+  left:40px;
+  width:110px;
+  height:37px;
+  background:#fff1f0;
+  border-radius:50% 50% 35% 35%;
+  border:4px solid #a63a40
+}
+
+.cream-drip{
+  position:absolute;
+  bottom:45px;
+  left:46px;
+  width:100px;
+  height:18px;
+  background:#fff8f4;
+  border-radius:0 0 15px 15px
+}
+
+.candle{
+  position:absolute;
+  bottom:88px;
+  left:88px;
+  width:12px;
+  height:31px;
+  background:#f1b8be;
+  border:3px solid #a63a40
+}
+
+.flame{
+  position:absolute;
+  bottom:116px;
+  left:86px;
+  font-size:25px;
+  color:#d94c3f
+}
+
+.cherry{
+  position:absolute;
+  width:13px;
+  height:13px;
+  background:#9e2730;
+  border-radius:50%;
+  bottom:70px
+}
+
+.c1{left:59px}
+.c2{right:59px}
+
+/* FLOWER */
+.bouquet{
+  height:155px;
+  position:relative;
+  width:190px;
+  margin:auto
+}
+
+.stem{
+  position:absolute;
+  width:4px;
+  height:105px;
+  background:#5e8b57;
+  bottom:10px;
+  left:93px;
+  transform-origin:bottom
+}
+
+.s1{transform:rotate(-18deg)}
+.s2{transform:rotate(0)}
+.s3{transform:rotate(18deg)}
+
+.flower-head{
+  position:absolute;
+  width:39px;
+  height:39px;
+  border-radius:50%;
+  background:#d45b69;
+  bottom:105px
+}
+
+.f1{left:48px}
+.f2{left:75px}
+.f3{left:102px}
+
+.flower-head:before,
+.flower-head:after{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  background:#ef9da7;
+  border-radius:50%;
+  top:8px
+}
+
+.flower-head:before{left:-7px}
+.flower-head:after{right:-7px}
+
+.center-dot{
+  position:absolute;
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:#ffd7a8;
+  left:14px;
+  top:14px;
+  z-index:2
+}
+
+.paper{
+  position:absolute;
+  bottom:0;
+  left:43px;
+  width:105px;
+  height:55px;
+  background:#f5c8ce;
+  clip-path:polygon(0 0,100% 20%,83% 100%,18% 82%);
+  transform:rotate(-4deg)
+}
+
+/* AUDIO */
+.music{
+  position:fixed;
+  top:8px;
+  right:8px;
+  width:1px;
+  height:1px;
+  opacity:.01;
+  pointer-events:none
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIK TETAP ADA -->
+<audio id="music" autoplay preload="auto" loop>
+  <source src="audio/video_to_mp3_0914_1540.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<section class="page active" id="p1">
+<div class="card center">
+
+<div class="smallheart" style="top:42px;left:28px">♡</div>
+<div class="smallheart" style="top:66px;right:28px">✦</div>
+
+<div class="ornament">♡ ✦ ♡</div>
+
+<h2>One little question...</h2>
+
+<p><i>What is today's date?</i></p>
+
+<input
+  id="code"
+  placeholder="DD / MM / YYYY"
+  inputmode="numeric"
+>
+
+<div class="error" id="err"></div>
+
+<button onclick="unlock()">ENTER</button>
+
+<p class="tiny">A little birthday surprise for Piyan ♡</p>
+
+</div>
+</section>
+
+
+<!-- PAGE 2 -->
+<section class="page" id="p2">
+<div class="card center">
+
+<div class="decor">🎀</div>
+
+<h1>
+HAPPY<br>
+BIRTHDAY<br>
+PIYAN!
+</h1>
+
+<p>♡ your special day ♡</p>
+
+<button class="next" onclick="go(3)">NEXT →</button>
+
+</div>
+</section>
+
+
+<!-- PAGE 3 : CALENDAR -->
+<section class="page" id="p3">
+<div class="card center">
+
+<h2>SEPTEMBER 2026</h2>
+
+<div class="calendar">
+
+<div class="month">SEPTEMBER 2026</div>
+
+<div class="grid">
+
+<div class="day">SUN</div>
+<div class="day">MON</div>
+<div class="day">TUE</div>
+<div class="day">WED</div>
+<div class="day">THU</div>
+<div class="day">FRI</div>
+<div class="day">SAT</div>
+
+<div></div>
+<div></div>
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<div>4</div>
+<div>5</div>
+
+<div>6</div>
+<div>7</div>
+<div>8</div>
+<div>9</div>
+<div>10</div>
+<div>11</div>
+<div>12</div>
+
+<div>13</div>
+<div>14</div>
+<div>15</div>
+<div>16</div>
+<div>17</div>
+<div>18</div>
+
+<div class="special">19</div>
+<div>20</div>
+<div>21</div>
+<div>22</div>
+<div>23</div>
+<div>24</div>
+<div>25</div>
+
+<div>26</div>
+<div>27</div>
+<div>28</div>
+<div>29</div>
+<div>30</div>
+
+</div>
+</div>
+
+<!-- FOTO DI KALENDER SUDAH DIHAPUS -->
+
+<button class="back" onclick="go(2)">←</button>
+<button class="next" onclick="go(4)">NEXT →</button>
+
+</div>
+</section>
+
+
+<!-- PAGE 4 : LETTER -->
+<section class="page" id="p4">
+<div class="card center">
+
+<h2>Surat Cinta untuk KAMU</h2>
+
+<div class="envelope" onclick="openLetter()">💌</div>
+
+<button onclick="openLetter()">OPEN</button>
+
+<div class="letter" id="letter">
+
+<p><b>Selamat ulang tahun, sayang 🤍</b></p>
+
+<p>
+Di hari ini aku cuma mau ngucapin semoga kamu selalu dikelilingi hal-hal baik.
+Semoga di umur yang baru ini apa yang lagi kamu usahain satu-satu bisa tercapai.
+</p>
+
+<p>
+Makasih ya udah hadir dan jadi salah satu orang yang bikin hari-hariku lebih seru.
+Kita emang nggak selalu punya hari yang perfect, kadang ada aja hal kecil yang bikin kesel atau beda pendapat,
+tapi ya namanya juga kita.
+</p>
+
+<p>
+Pokoknya, bahagia terus, jangan terlalu keras sama diri sendiri,
+dan kalau lagi cape istirahat dulu.
+Semoga tahun ini jadi tahun yang banyak baiknya buat kamu.
+</p>
+
+<p>
+<b>Happy birthday, Piyan. Enjoy your 19! 🫶🏻</b>
+</p>
+
+</div>
+
+<button class="back" onclick="go(3)">←</button>
+<button class="next" onclick="go(5)">NEXT →</button>
+
+</div>
+</section>
+
+
+<!-- PAGE 5 : GIFTS -->
+<section class="page" id="p5">
+<div class="card center">
+
+<div class="ornament">✦ 2 LITTLE GIFTS ✦</div>
+
+<h2>Open one by one ♡</h2>
+
+<!-- GIFT PHOTO SUDAH DIHAPUS -->
+<div class="gifts">
+
+<!-- CAKE -->
+<div class="gift" onclick="gift('cake')">
+
+<div class="gift-art">
+<div class="box">
+<div class="bow">⌁</div>
+</div>
+</div>
+
+<span>CAKE</span>
+
+</div>
+
+
+<!-- FLOWER -->
+<div class="gift" onclick="gift('flower')">
+
+<div class="gift-art">
+<div class="box">
+<div class="bow">⌁</div>
+</div>
+</div>
+
+<span>FLOWER</span>
+
+</div>
+
+</div>
+
+
+<!-- CAKE REVEAL -->
+<div class="reveal" id="cake">
+
+<div class="reveal-card">
+
+<div class="reveal-title">
+A little cake for you ♡
+</div>
+
+<div class="cake-art">
+
+<div class="flame">♥</div>
+
+<div class="candle"></div>
+
+<div class="cake-top"></div>
+
+<div class="cream-drip"></div>
+
+<div class="cake-bottom"></div>
+
+<div class="cherry c1"></div>
+<div class="cherry c2"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- FLOWER REVEAL -->
+<div class="reveal" id="flower">
+
+<div class="reveal-card">
+
+<div class="reveal-title">
+A little flower for you ♡
+</div>
+
+<div class="bouquet">
+
+<div class="stem s1"></div>
+<div class="stem s2"></div>
+<div class="stem s3"></div>
+
+<div class="flower-head f1">
+<div class="center-dot"></div>
+</div>
+
+<div class="flower-head f2">
+<div class="center-dot"></div>
+</div>
+
+<div class="flower-head f3">
+<div class="center-dot"></div>
+</div>
+
+<div class="paper"></div>
+
+</div>
+
+</div>
+</div>
+
+
+<button class="back" onclick="go(4)">←</button>
+
+<button class="next" onclick="go(6)">NEXT →</button>
+
+</div>
+</section>
+
+
+<!-- PAGE 6 -->
+<section class="page" id="p6">
+<div class="card center">
+
+<div class="ornament">♡ ✦ ♡</div>
+
+<h2>SELESAI 🤍</h2>
+
+<p class="final">
+Aku udah ngucapin semuanya, jadi hari ini senyum terus yaa! 🫵🏻😼
+</p>
+
+<p>
+Jangan lupa nikmatin hari kamu.
+</p>
+
+<p>
+<b>Happy birthday sekali lagi, Piyan! 🤍</b>
+</p>
+
+</div>
+</section>
+
+
+<script>
+
+const music = document.getElementById('music');
+
+function tryMusic(){
+  music.play().catch(()=>{});
+}
+
+window.addEventListener('load',tryMusic);
+
+document.addEventListener('click',tryMusic,{once:true});
+
+
+function go(n){
+
+  document
+    .querySelectorAll('.page')
+    .forEach(x=>x.classList.remove('active'));
+
+  document
+    .getElementById('p'+n)
+    .classList.add('active');
+
+  window.scrollTo(0,0);
+
+  tryMusic();
+}
+
+
+function unlock(){
+
+  const v =
+    document
+      .getElementById('code')
+      .value
+      .trim()
+      .replace(/\s/g,'');
+
+  const ok = [
+    '19/09/2026',
+    '19-09-2026',
+    '19.09.2026',
+    '19092026',
+    '09/19/2026',
+    '09-19-2026',
+    '09192026'
+  ];
+
+  if(ok.includes(v)){
+
+    tryMusic();
+    go(2);
+
+  }else{
+
+    document
+      .getElementById('err')
+      .textContent =
+      'Hmm... coba tanggal ulang tahunmu 👀';
+
+  }
+}
+
+
+document
+  .getElementById('code')
+  .addEventListener('keydown',e=>{
+
+    if(e.key==='Enter') unlock();
+
+  });
+
+
+function openLetter(){
+
+  document
+    .getElementById('letter')
+    .style.display='block';
+
+  tryMusic();
+
+}
+
+
+function gift(name){
+
+  document
+    .querySelectorAll('.reveal')
+    .forEach(x=>x.style.display='none');
+
+  document
+    .getElementById(name)
+    .style.display='block';
+
+  tryMusic();
+
+}
+
+</script>
+
+</body>
+</html>
